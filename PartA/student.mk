@@ -29,5 +29,7 @@ SCFLAGS +=
 
 # If set to true, GDB will not provide a welcome message
 GDB_QUIET = true
+# Override the debugger to use gdb-multiarch instead of arm-none-eabi-gdb
+DB = gdb-multiarch
 # To ease debugging, you can add GDB commands into the file GDBStudentCommands and they will be
 # executed automatically upon each start of GDB
