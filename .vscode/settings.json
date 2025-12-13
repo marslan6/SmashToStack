@@ -1,0 +1,17 @@
+{
+    "PROJECT.NAME": "PartC",
+    "files.associations": {
+        "xmc_gpio.h": "c",
+        "xmc_common.h": "c",
+        "xmc_device.h": "c",
+        "xmc4500.h": "c",
+        "usb.h": "c",
+
+        "VirtualSerial.h": "c",
+        "Descriptors.h": "c",
+        "MPUeasy.h": "c",
+        "packetizer.h": "c",
+        "crypto.h": "c",
+        "base64url.h": "c"
+    }
+}

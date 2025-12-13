@@ -1,0 +1,18 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "J-Link (XMC4500)",
+      "type": "cortex-debug",
+      "request": "launch",
+      "servertype": "jlink",
+      "device": "XMC4500",
+      "interface": "swd",
+      "runToEntryPoint": "main", // MODIFIED
+      "cwd": "${workspaceFolder}",
+      "executable": "${workspaceFolder}/${config:PROJECT.NAME}/build/main.elf", // MODIFIED
+      "gdbPath": "/usr/bin/gdb-multiarch",
+      "serverpath": "JLinkGDBServer"   // remove or set full path if needed: "/opt/SEGGER/JLink/JLinkGDBServer"
+    }
+  ]
+}
