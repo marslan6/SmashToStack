@@ -2,7 +2,7 @@
 # Change this file to match your requirements
 
 # Name of your project
-LD_NAME = Assignment2C
+LD_NAME = SMASHTOSTACK
 
 # Add lists of space separated source files
 # Own sources, e.g. main.c
@@ -26,6 +26,8 @@ SCFLAGS += -O1
 # If you like, you can enable even more warnings, e.g. -Wextra, but for grading -Wall will be used
 # You can also add any other compiler flag here if either necessary or you find it appropriate
 SCFLAGS += -fstack-protector
+# To ensure correct stepping during debug mode, add the following line.  
+SCFLAGS += -Og -fno-omit-frame-pointer -fno-inline
 
 # If set to true, GDB will not provide a welcome message
 GDB_QUIET = true
