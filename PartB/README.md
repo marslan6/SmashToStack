@@ -26,6 +26,31 @@ Because we overflow the buffer, our payload must match this exact structure to s
 - **Registers:** The function ending `pop {r4-r7, pc}` restores these values. We inject specific addresses to maintain program stability (e.g. keeping R4-R6 pointing to valid stack/data areas).
 - **Return Address (LR):** Overwritten to jump to the `blink` function logic or resume execution cleanly.
 
+## Analysis Commands
+These commands were used to determine the stack layout and addresses. Use them to verify your target:
+
+### 1. Inspect `encrypt` function (Stack Frame & Logic)
+```bash
+arm-none-eabi-objdump -d build/main.elf | grep -A 30 "<encrypt>"
+```
+*Look for `sub sp, #140` (buffer allocation) and `pop` instructions.*
+
+### 2. Inspect `main` function (Stack Depth & Calls)
+```bash
+arm-none-eabi-objdump -d build/main.elf | grep -A 30 "<main>"
+```
+
+### 3. Find Global Addresses (e.g., Canary)
+```bash
+arm-none-eabi-objdump -d build/main.elf | grep -A 20 "__stack_chk_guard"
+```
+
+### 4. Find Gadget/Function Addresses
+To find the address of `blink` or resume points:
+```bash
+arm-none-eabi-objdump -d build/main.elf | grep "blink"
+```
+
 ## Instructions
 
 ### 1. Build the Exploit
