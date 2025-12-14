@@ -2,13 +2,13 @@
 
 ## Overview
 
-This assignment demonstrates a **stack buffer overflow attack** on an embedded ARM Cortex-M4 device (XMC4500). The goal is to exploit a vulnerable encryption function to execute arbitrary code (shellcode) that turns on LEDs.
+This assignment demonstrates a **stack buffer overflow attack** on an embedded ARM Cortex-M4 device (XMC4500). The goal is to exploit a vulnerable encryption function to overwrite the return address and redirect execution to the `blink` function, which turns on LEDs.
 
 ## Objective
 
 Exploit the buffer overflow vulnerability in the `encrypt()` function to:
 1. Overwrite the return address on the stack.
-2. Execute shellcode that configures and turns on LEDs at GPIO pins P1.0 and P1.1.
+2. Redirect execution to the `blink` function, which configures and turns on LEDs at GPIO pins P1.0 and P1.1.
 3. Resume normal program execution without crashing.
 
 ## Stack Layout Analysis
@@ -69,6 +69,30 @@ arm-none-eabi-gdb build/main.elf
 # Send exploit from another terminal
 gdb) print/x $sp
 # Should show: 0x100007c0 (before prologue) or 0x10000720 (after)
+```
+
+### Viewing the Stack Canary Value
+To see the value of the Canary in the stack, use the following command:
+```bash
+arm-none-eabi-objdump -d build/main.elf | grep -A20 "__stack_chk_guard"
+```
+Example output:
+```asm
+800556c:       23d58132                                2..#
+```
+
+## Debugging with GDB
+
+### Terminal 1: Start GDB
+```bash
+cd /home/htmos6/Downloads/SmashToStack/assignment_2/PartB
+make debug
+```
+
+### Terminal 2: Send the exploit (once GDB is ready)
+```bash
+cd /home/htmos6/Downloads/SmashToStack/assignment_2/PartB
+python3 sendExploit.py exploit --device /dev/ttyACM0
 ```
 
 ## Files Overview
