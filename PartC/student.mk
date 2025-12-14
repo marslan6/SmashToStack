@@ -6,7 +6,7 @@ LD_NAME = SMASHTOSTACK
 
 # Add lists of space separated source files
 # Own sources, e.g. main.c
-SRCS = main.c clockSetup.c VirtualSerial.c Descriptors.c packetizer.c crypto.c base64url.c MPUeasy.c stack_protector.c
+SRCS = main.c clockSetup.c VirtualSerial.c Descriptors.c packetizer.c crypto.c base64url.c MPUeasy.c stack_protector.c randombytes_salsa20XMC_random.c
 # Header files for configuration. Adding the header file will  make make compile on changes.
 HDRS = VirtualSerial.h Descriptors.h packetizer.h crypto.h base64url.h
 # Library sources, e.g. xmc_gpio.c
@@ -34,6 +34,7 @@ SCFLAGS += -Og -fno-omit-frame-pointer -fno-inline
 
 # Add the include path for headers
 SCFLAGS += -I/home/htmos6/Downloads/SmashToStack/sodium_1-0-15_ARMcompiled/sodium/sodium-1.0.15/include
+SCFLAGS += -I/home/htmos6/Downloads/SmashToStack/randombytes
 
 # If set to true, GDB will not provide a welcome message
 GDB_QUIET = true
