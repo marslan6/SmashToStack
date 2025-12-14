@@ -47,10 +47,13 @@ int main(void)
 
   // Initialize the libsodium library. 
   // Exit if initialization fails
+  sodium_init();
+  /*
   if (sodium_init() == -1) 
   {
     return -1; // Sodium initialization failed
   }
+  */
 
   while(1) 
   {
