@@ -1,0 +1,62 @@
+# GDB Student Commands - Debug PartB Exploit
+
+# 1. Load the symbols/executable (Critical Fix)
+file build/main.elf
+
+# 2. Connect to the JLink GDB Server
+target remote localhost:2331
+
+# 3. Reset the device to a clean state
+monitor reset
+load
+
+# Break after memcpy (payload is in memory)
+break *0x08000794
+commands
+    silent
+    printf "\n========== PAYLOAD IN MEMORY ==========\n"
+    printf "SP = 0x%08x\n\n", $sp
+    
+    printf "Buffer [SP+4 to SP+35]:\n"
+    x/8xw $sp+4
+    
+    printf "\nCanary [SP+132]:\n"
+    x/wx $sp+132
+    printf "Expected: 0x23d58132\n"
+    
+    printf "\nSaved registers [SP+140 to SP+159]:\n"
+    x/5xw $sp+140
+    printf "\nExpected return: 0x0800034b\n"
+    
+    printf "\nType 'c' to continue to canary check...\n"
+end
+
+# Break at canary check
+break *0x080007c8
+commands
+    silent
+    printf "\n========== CANARY CHECK ==========\n"
+    printf "r2 (stack): 0x%08x\n", $r2
+    printf "r3 (orig):  0x%08x\n", $r3
+    if $r2 == $r3
+        printf "PASS\n"
+    else
+        printf "FAIL\n"
+    end
+    printf "\nType 'c' to continue to return...\n"
+end
+
+# Break at return
+break *0x080007ce  
+commands
+    silent
+    printf "\n========== ABOUT TO RETURN ==========\n"
+    printf "Return address: 0x%08x\n", *(unsigned int*)($sp+16)
+    printf "Press 's' to step, 'c' to continue\n"
+end
+
+printf "\n==================================================\n"
+printf "GDB IS READY!\n"
+printf "1. In other terminal: python3 sendExploit.py exploit --device /dev/ttyACM0\n"
+printf "2. In this terminal:  Type 'c' (continue) to start\n"
+printf "==================================================\n"
