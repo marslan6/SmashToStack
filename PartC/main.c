@@ -9,6 +9,7 @@
 #include "VirtualSerial.h"
 #include "packetizer.h"
 #include "crypto.h"
+#include "randombytes_salsa20XMC_random.h"
 
 // Concatenates the Unique Chip ID (UCI) to create a 32-byte key
 // The UCI is repeated twice to fill the key buffer
@@ -43,7 +44,7 @@ int main(void)
 
   // Initialize USB communication and the random number generator
   USB_Init();
-  randombytes_set_implementation(&randombytes_stir);
+  randombytes_set_implementation(&randombytes_salsa20XMC_implementation);
 
   // Initialize the libsodium library. 
   // Exit if initialization fails
