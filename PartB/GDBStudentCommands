@@ -54,10 +54,15 @@ commands
     printf "r2 (stack): 0x%08x\n", $r2
     printf "r3 (orig):  0x%08x\n", $r3
     if $r2 == $r3
-        printf "PASS\n"
+        printf "PASS: Canary matches\n"
     else
-        printf "FAIL\n"
+        printf "FAIL: Canary mismatch\n"
     end
+    
+    printf "\n[+] Verifying Padding (Expect 0xcc)...\n"
+    # Shellcode (160B) + Padding. Inspect a chunk in the middle.
+    x/160xb $sp+4
+    
     printf "\nType 'c' to continue to return...\n"
 end
 
