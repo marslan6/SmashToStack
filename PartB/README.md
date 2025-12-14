@@ -85,13 +85,13 @@ Example output:
 
 ### Terminal 1: Start GDB
 ```bash
-cd /home/htmos6/Downloads/SmashToStack/assignment_2/PartB
+cd /home/htmos6/Downloads/SmashToStack/PartB
 make debug
 ```
 
 ### Terminal 2: Send the exploit (once GDB is ready)
 ```bash
-cd /home/htmos6/Downloads/SmashToStack/assignment_2/PartB
+cd /home/htmos6/Downloads/SmashToStack/PartB
 python3 sendExploit.py exploit --device /dev/ttyACM0
 ```
 
