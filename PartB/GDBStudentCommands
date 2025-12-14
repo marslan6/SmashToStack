@@ -1,7 +1,8 @@
 # GDB Student Commands - Debug PartB Exploit
 
-# 1. Load the symbols/executable (Critical Fix)
+# 1. Load the symbols/executable
 file build/main.elf
+tui disable
 
 # 2. Connect to the JLink GDB Server
 target remote localhost:2331
@@ -9,6 +10,20 @@ target remote localhost:2331
 # 3. Reset the device to a clean state
 monitor reset
 load
+
+# Break at start of encrypt to see ORIGINAL register values
+break encrypt
+commands
+    silent
+    printf "\n========== ENTERING ENCRYPT ==========\n"
+    printf "Original R4: 0x%08x\n", $r4
+    printf "Original R5: 0x%08x\n", $r5
+    printf "Original R6: 0x%08x\n", $r6
+    printf "Original R7: 0x%08x\n", $r7
+    printf "Original R8: 0x%08x\n", $r8
+    printf "Original LR: 0x%08x\n", $lr
+    continue
+end
 
 # Break after memcpy (payload is in memory)
 break *0x08000794
