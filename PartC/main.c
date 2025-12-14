@@ -83,7 +83,7 @@ int main(void)
 
       // Encrypt the plaintext using the generated or provided nonce. 
       // crypto_secretbox_easy returns 0 in case of success.
-      if(crypto_secretbox_easy(&ciphertext.text, plaintext.text, plaintext.textLen, plaintext.nonce, key) == 0) 
+      if(crypto_secretbox_easy(ciphertext.text, plaintext.text, plaintext.textLen, plaintext.nonce, key) == 0) 
       {
         ciphertext.textLen = plaintext.textLen + crypto_secretbox_MACBYTES;
         // Send the encrypted data back as a packet.
