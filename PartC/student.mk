@@ -12,7 +12,10 @@ HDRS = VirtualSerial.h Descriptors.h packetizer.h crypto.h base64url.h
 # Library sources, e.g. xmc_gpio.c
 LIBSRCS = USBController_XMC4000.c xmc_usbd.c CDCClassDevice.c USBTask.c Endpoint_XMC4000.c xmc4_scu.c EndpointStream_XMC4000.c memcpy.c xmc_gpio.c xmc4_gpio.c xmc_ccu4.c
 # Precompiled libraries, e.g. -lm for math functions
-LIBLNK =
+LIBLNK += -L/home/htmos6/Downloads/SmashToStack/sodium_1-0-15_ARMcompiled/sodium/sodium-1.0.15/lib
+
+# Link the actual library file (libsodium.a)
+LIBLNK += -lsodium
 
 # Change this line if the path to your XMC-Library differs, it will be overwritten before grading to
 # match the system the grading is performed on.
@@ -28,6 +31,9 @@ SCFLAGS += -O1
 SCFLAGS += -fstack-protector
 # To ensure correct stepping during debug mode, add the following line.  
 SCFLAGS += -Og -fno-omit-frame-pointer -fno-inline
+
+# Add the include path for headers
+SCFLAGS += -I/home/htmos6/Downloads/SmashToStack/sodium_1-0-15_ARMcompiled/sodium/sodium-1.0.15/include
 
 # If set to true, GDB will not provide a welcome message
 GDB_QUIET = true
