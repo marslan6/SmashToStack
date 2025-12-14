@@ -7,7 +7,8 @@
                 "/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/inc", // MODIFIED
                 "/opt/XMClib/XMC_Peripheral_Library_v2.1.16/CMSIS/Include", // MODIFIED
                 "/opt/XMClib/XMC_Peripheral_Library_v2.1.16/CMSIS/Infineon/XMC4500_series/Include", // MODIFIED
-                "/opt/XMClib/XMC_Peripheral_Library_v2.1.16/ThirdPartyLibraries/**" // MODIFIED
+                "/opt/XMClib/XMC_Peripheral_Library_v2.1.16/ThirdPartyLibraries/**", // MODIFIED
+                "${workspaceFolder}/sodium_1-0-15_ARMcompiled/sodium/sodium-1.0.15/include" // MODIFIED
             ],
             "defines": [
                 "XMC4500_F100x1024"
