@@ -5,6 +5,7 @@
 - Install the Cortex-Debug extension: https://marketplace.visualstudio.com/items?itemName=marus25.cortex-debug
 - SEGGER J-Link tools (JLinkGDBServer, JLinkSWOViewerExe) and arm-none-eabi toolchain installed and in PATH as needed.
 
+
 ## Project Structure
 
 Put .c, Makefile, student.mk files under new folder named as `"PROJECT.NAME"`
